@@ -16,7 +16,7 @@ async function startApolloServer(typeDefs, resolvers) {
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
-  server.applyMiddleware({ app, cors: { origin: '*' } });
+  server.applyMiddleware({ app, cors: { origin: '*', credentials: true } });
 
   const PORT = process.env.PORT || 4000;
 
