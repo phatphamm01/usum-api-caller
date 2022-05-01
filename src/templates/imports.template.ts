@@ -7,7 +7,6 @@ export const defineImports = (): string => {
     ParametersStore;
   if (isCodeGen) {
     template = `
-    import { OperationDefinitionNode } from 'graphql';
     ${guessFragmentTypeTemplate}
     `;
     if (codegenReactHooks) {
@@ -21,6 +20,7 @@ export const defineImports = (): string => {
     if (codegenFunctions) {
       if (apolloVersion === 3) {
         template += `
+        import { OperationDefinitionNode } from 'graphql';
         import { ApolloClient, execute, DocumentNode, gql } from '@apollo/client/core';
       `;
       } else {
