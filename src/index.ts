@@ -1,8 +1,7 @@
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { sgtsGenerate } from './main';
 
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import express from 'express';
 import http from 'http';
 import { gql } from 'apollo-server';
@@ -13,10 +12,11 @@ async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: { origin: '*' } });
 
   const PORT = process.env.PORT || 4000;
 
