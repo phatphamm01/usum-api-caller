@@ -1,7 +1,32 @@
-import { ApolloServer, gql } from 'apollo-server';
-
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { sgtsGenerate } from './main';
+
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import express from 'express';
+import http from 'http';
+import { gql } from 'apollo-server';
+
+async function startApolloServer(typeDefs, resolvers) {
+  const app = express();
+  const httpServer = http.createServer(app);
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  });
+  await server.start();
+  server.applyMiddleware({ app });
+
+  const PORT = process.env.PORT || 3000;
+
+  await new Promise<void>((resolve) =>
+    httpServer.listen({ port: PORT }, resolve)
+  );
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  );
+}
 
 const typeDefs = gql`
   input Generate {
@@ -41,12 +66,4 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
-});
-
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+startApolloServer(typeDefs, resolvers);

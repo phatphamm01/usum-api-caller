@@ -1,1 +1,0 @@
-{"version":"1.0.0","name":"usum-api-caller-nodejs","dependencies":{"dotenv":{"version":"16.0.0"},"express":{"version":"4.18.1"},"graphql":{"version":"16.4.0"},"mkdirp":{"version":"1.0.4"},"node-fetch":{"version":"2.6.1"},"ora":{"version":"6.1.0"},"prettier":{"version":"2.6.2"},"querystringify":{"version":"2.2.0"}}}
