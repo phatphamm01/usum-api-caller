@@ -4,7 +4,6 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "build": "npx tsc",
     "start": "npx tsc -w",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
