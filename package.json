@@ -15,6 +15,7 @@
     "express-graphql": "^0.12.0",
     "express-validator": "^6.14.0",
     "graphql": "^16.4.0",
+    "graphql-disable-introspection": "^1.2.0",
     "mkdirp": "^1.0.4",
     "node-fetch": "2.6.1",
     "ora": "^5.4.1",

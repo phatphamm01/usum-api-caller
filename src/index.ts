@@ -5,6 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import http from 'http';
 import { gql } from 'apollo-server';
+import NoIntrospection from 'graphql-disable-introspection';
 
 async function startApolloServer(typeDefs, resolvers) {
   const app = express();
@@ -13,6 +14,7 @@ async function startApolloServer(typeDefs, resolvers) {
     typeDefs,
     resolvers,
     introspection: process.env.NODE_ENV !== 'production',
+    validationRules: [NoIntrospection],
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
