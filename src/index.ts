@@ -12,7 +12,7 @@ async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-
+    introspection: process.env.NODE_ENV !== 'production',
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
