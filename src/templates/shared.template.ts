@@ -16,7 +16,7 @@ export const sharedTemplate = () => {
  
      export type Maybe<T> = T | null;
 
-     type NonNullable<T> = Exclude<T, null>;
+     type NonNullable<T> = Exclude<T, null | undefined>;
 
      type KeysMatching<T, V> = {
        [K in keyof T]-?: T[K] extends V ? K : never;
@@ -26,7 +26,7 @@ export const sharedTemplate = () => {
        [K in keyof T]-?: T[K] extends V ? never : K;
      }[keyof T];
      
-     type MatchingType = Maybe<string> | Maybe<number> | Maybe<boolean>;
+     type MatchingType = string | number | boolean;
      
      type FilterMaybe<T> = { [k in keyof T]: NonNullable<T[k]> };
      
@@ -39,7 +39,7 @@ export const sharedTemplate = () => {
          }
      )[];
      
-     type GenFields<T> = GenFieldsAll<FilterMaybe<T>>;
+     export type GenFields<T> = GenFieldsAll<FilterMaybe<T>>;
 
     const queryBuilder = <T>(fields?: GenFields<T>): string => {
     return fields
