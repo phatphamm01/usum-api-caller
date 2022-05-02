@@ -7,46 +7,61 @@ export const sharedTemplate = () => {
  ${tsCheck ? '' : '// @ts-nocheck'}
  // *******************************************************
  // *******************************************************
- //
- // GENERATED FILE, DO NOT MODIFY
  // USUM SOFTWARE
+ // GENERATED FILE, DO NOT MODIFY
+ //
  // *******************************************************
  // *******************************************************
  // 💙
  
- export type Maybe<T> = T | null;
+     export type Maybe<T> = T | null;
 
- type GenFields<T> = ((keyof T) | {[k in keyof T]?: GenFields<T[k]>})[];
+    type KeysMatching<T, V> = {
+    [K in keyof T]-?: T[K] extends V ? K : never;
+    }[keyof T];
 
- const queryBuilder = <T>(fields?: GenFields<T>): string => {
-  return fields
-      ? fields
-          .map((field: any) => {
-              if (typeof field === "object") {
-                  let result = "";
+    type KeysNotMatching<T, V> = {
+    [K in keyof T]-?: T[K] extends V ? never : K;
+    }[keyof T];
 
-                  Object.entries<any>(field as Record<string, any>).forEach(
-                      ([key, values], index, array) => {
-                          result += \`\${key} \${values.length > 0
-                              ? "{ " + queryBuilder(values) + " }"
-                              : ""
-                              }\`;
+    type GenFields<T> = (
+    | KeysMatching<T, string | number>
+    | {
+        [k in KeysNotMatching<T, string | number>]?: T[k] extends any[]
+            ? GenFields<T[k][number]>
+            : GenFields<T[k]>;
+        }
+    )[];
 
-                          // If it's not the last item in array, join with comma
-                          if (index < array.length - 1) {
-                              result += ", ";
-                          }
-                      }
-                  );
+    const queryBuilder = <T>(fields?: GenFields<T>): string => {
+    return fields
+        ? fields
+            .map((field: any) => {
+                if (typeof field === "object") {
+                    let result = "";
 
-                  return result;
-              } else {
-                  return \`\${field}\`;
-              }
-          })
-          .join("\\n ")
-      : "";
-}
+                    Object.entries<any>(field as Record<string, any>).forEach(
+                        ([key, values], index, array) => {
+                            result += \`\${key} \${values.length > 0
+                                ? "{ " + queryBuilder(values) + " }"
+                                : ""
+                                }\`;
+
+                            // If it's not the last item in array, join with comma
+                            if (index < array.length - 1) {
+                                result += ", ";
+                            }
+                        }
+                    );
+
+                    return result;
+                } else {
+                    return \`\${field}\`;
+                }
+            })
+            .join("\\n ")
+        : "";
+    }
 
  `;
 };
