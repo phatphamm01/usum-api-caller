@@ -24,10 +24,12 @@ export const sharedTemplate = () => {
     [K in keyof T]-?: T[K] extends V ? never : K;
     }[keyof T];
 
+    type MatchingType = Maybe<string> | Maybe<number> | Maybe<boolean>
+
     type GenFields<T> = (
-    | KeysMatching<T, string | number>
+    | KeysMatching<T, MatchingType>
     | {
-        [k in KeysNotMatching<T, string | number>]?: T[k] extends any[]
+        [k in KeysNotMatching<T, MatchingType>]?: T[k] extends any[]
             ? GenFields<T[k][number]>
             : GenFields<T[k]>;
         }
