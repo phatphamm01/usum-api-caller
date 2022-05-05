@@ -22,6 +22,7 @@ class ParametersConstructor {
     Upload: 'File',
     Boolean: 'boolean',
     Json: 'string',
+    DateTime: 'string',
   };
   public prefix = '';
   public suffix = '';

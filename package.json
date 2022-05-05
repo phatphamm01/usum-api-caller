@@ -4,7 +4,8 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "npx tsc -w"
+    "start": "npx tsc -w",
+    "dev": "nodemon"
   },
   "dependencies": {
     "apollo-server": "^3.6.7",

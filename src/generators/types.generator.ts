@@ -34,7 +34,13 @@ export const getOneTSTypeDisplay = ({
 }: {
   field: Field | InputField | Arg;
 }): string => {
+  if ((field.name = 'createAt')) {
+    console.log(field);
+  }
+
   const { prefix, suffix, listScalars } = ParametersStore;
+  console.log(listScalars);
+
   const { isScalar, typeName, isArray } = SchemaStore.getFieldProps(field);
   const returnedName = isScalar
     ? listScalars[typeName]
@@ -51,11 +57,14 @@ export const generatedTsFields = (
   return fields.map((field) => {
     let propertyName = field.name;
     const { isRequired } = SchemaStore.getFieldProps(field);
+
     const TStypeName = getOneTSTypeDisplay({ field });
+
     const hasDescription =
       field.description ||
       ('isDeprecated' in field && field.isDeprecated) ||
       ('defaultValue' in field && field.defaultValue);
+
     return `${
       hasDescription
         ? `/** ${
