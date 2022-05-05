@@ -58,8 +58,9 @@ export const createReactApolloHook = ({
     ${field.description ? `/** ${field.description} */` : ''}
     export const use${capitalizeFirstLetter(
       field.name
-    )} = (fragment: GenFields<${returnedTypeDisplay}>, options?: ${typeNameUpper}HookOptions<${TOptions}>) => {
-      const { isString, isFragment, fragmentName } = guessFragmentType(queryBuilder(fragment));
+    )} = (fields: GenFields<${returnedTypeDisplay}>, options?: ${typeNameUpper}HookOptions<${TOptions}>) => {
+      const fragment = queryBuilder(fragment);
+      const { isString, isFragment, fragmentName } = guessFragmentType(fragment);
       const ${typeNameLower} = ${Query}
 
       ${useHookOutput}
