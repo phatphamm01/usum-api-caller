@@ -34,7 +34,7 @@ export function generateTemplateQuery({
         ${methodName}${hasArgs ? `(${GQLArgs.join(',')})` : ''} {
           ${innerFragment}
         }
-      } \${isFragment ? fragment : ''}
+      } \${isFragment ? queryBuilder(fragment) : ''}
       \``;
   } else {
     return `gql\`
