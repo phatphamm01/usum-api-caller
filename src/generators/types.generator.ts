@@ -1,5 +1,5 @@
 import { Field, InputField, Arg, Type } from '../models';
-import { capitalizeAllWord } from '../utilities';
+import { capitalizeAllWord, capitalizeFirstLetter } from '../utilities';
 import { ParametersStore } from '../store/parameters.store';
 import { SchemaStore } from '../store';
 
@@ -106,9 +106,9 @@ export const buildTsInterfaceString = (
   const { prefix, suffix } = ParametersStore;
   return `${
     type.description ? `/** ${type.description} */\n` : ''
-  } export interface ${prefix ? prefix : ''}${type.name}${
-    suffix ? suffix : ''
-  }${additionalSuffix ? additionalSuffix : ''} {
+  } export interface ${prefix ? prefix : ''}${capitalizeFirstLetter(
+    type.name
+  )}${suffix ? suffix : ''}${additionalSuffix ? additionalSuffix : ''} {
     ${fields.join('\n')}
   }
 `;
