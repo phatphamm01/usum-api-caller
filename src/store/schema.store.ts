@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from 'utilities';
+import { capitalizeFirstLetter } from '../utilities';
 import { generateQGLArg } from '../generators';
 import {
   Arg,
