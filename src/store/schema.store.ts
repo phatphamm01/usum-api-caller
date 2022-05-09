@@ -100,11 +100,10 @@ class SchemaConstructor {
     );
     let functionArgsTypeName = '';
     if (field.args.length) {
-      const parsedSuffix =
-        (suffix ? capitalizeFirstLetter(suffix) : '') + 'Args';
-      functionArgsTypeName = `${prefix ? prefix : ''}${
+      const parsedSuffix = (suffix ? suffix : '') + 'Args';
+      functionArgsTypeName = `${prefix ? prefix : ''}${capitalizeFirstLetter(
         field.name
-      }${parsedSuffix}`;
+      )}${parsedSuffix}`;
     }
     return {
       GQLArgs,
