@@ -100,8 +100,9 @@ class SchemaConstructor {
     );
     let functionArgsTypeName = '';
     if (field.args.length) {
-      const parsedSuffix = (suffix ? suffix : '') + 'Args';
-      functionArgsTypeName = `${prefix ? capitalizeFirstLetter(prefix) : ''}${
+      const parsedSuffix =
+        (suffix ? capitalizeFirstLetter(suffix) : '') + 'Args';
+      functionArgsTypeName = `${prefix ? prefix : ''}${
         field.name
       }${parsedSuffix}`;
     }
