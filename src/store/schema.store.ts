@@ -1,3 +1,4 @@
+import { capitalizeFirstLetter } from 'utilities';
 import { generateQGLArg } from '../generators';
 import {
   Arg,
@@ -100,7 +101,7 @@ class SchemaConstructor {
     let functionArgsTypeName = '';
     if (field.args.length) {
       const parsedSuffix = (suffix ? suffix : '') + 'Args';
-      functionArgsTypeName = `${prefix ? prefix : ''}${
+      functionArgsTypeName = `${prefix ? capitalizeFirstLetter(prefix) : ''}${
         field.name
       }${parsedSuffix}`;
     }
