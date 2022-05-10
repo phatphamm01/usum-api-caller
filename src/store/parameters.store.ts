@@ -23,6 +23,7 @@ class ParametersConstructor {
     Boolean: 'boolean',
     Json: 'string',
     DateTime: 'string',
+    Date: 'string',
   };
   public prefix = '';
   public suffix = '';
