@@ -88,6 +88,8 @@ export const getObjectTSInterfaces = (
 ): string => {
   let fields = isInput ? object.inputFields : object.fields;
   const generatedFields = generatedTsFields(fields, isInput);
+  console.log(generatedFields.join('\n').replaceAll(/Maybe|<|>/gm, ''));
+
   return buildTsInterfaceString(object, generatedFields);
 };
 
@@ -104,6 +106,7 @@ export const buildTsInterfaceString = (
   additionalSuffix?: string
 ): string => {
   const { prefix, suffix } = ParametersStore;
+
   return `${
     type.description ? `/** ${type.description} */\n` : ''
   } export interface ${prefix ? prefix : ''}${capitalizeFirstLetter(
