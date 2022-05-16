@@ -88,8 +88,6 @@ export const getObjectTSInterfaces = (
 ): string => {
   let fields = isInput ? object.inputFields : object.fields;
   const generatedFields = generatedTsFields(fields, isInput);
-  console.log(generatedFields.join('\n').replaceAll(/Maybe|<|>/gm, ''));
-
   return buildTsInterfaceString(object, generatedFields);
 };
 
