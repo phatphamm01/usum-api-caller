@@ -66,11 +66,12 @@ export function createGraphQLFunction({
   } else {
     return `
     ${field.description ? `/** ${field.description} */` : ''}
-    ${methodName}(fragment${
+    ${methodName}(fields${
       genFragments ? '?' : ''
-    }: string | DocumentNode): ExecutableQuery${withArgs}<${returnedTypeDisplay}${
+    }: GenFields<${returnedTypeDisplay}>): ExecutableQuery${withArgs}<${returnedTypeDisplay}${
       hasArgs ? ',' + functionArgsTypeName : ''
     }> {
+      const fragment = queryBuilder(fields);
       let isString = false; let isFragment = false; let fragmentName = '';
       if (fragment) ({ isString, isFragment, fragmentName } = guessFragmentType(fragment))
 
