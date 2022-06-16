@@ -39,7 +39,9 @@ export const sharedTemplate = () => {
          }
      )[];
      
-     export type GenFields<T> = GenFieldsAll<FilterMaybe<T>>;
+     export type GenFields<T> = T extends any[]
+        ? GenFieldsAll<FilterMaybe<T[number]>>
+        : GenFieldsAll<FilterMaybe<T>>;
 
     const queryBuilder = <T>(fields?: GenFields<T>): string => {
     return fields
