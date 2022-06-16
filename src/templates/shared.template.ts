@@ -26,7 +26,7 @@ export const sharedTemplate = () => {
        [K in keyof T]-?: T[K] extends V ? never : K;
      }[keyof T];
      
-     type MatchingType = string | number | boolean | string[];
+     type MatchingType = string | number | boolean | string[] | number[] | boolean[];
      
      type FilterMaybe<T> = { [k in keyof T]: NonNullable<T[k]> };
      
