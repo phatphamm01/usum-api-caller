@@ -24,6 +24,7 @@ class ParametersConstructor {
     Json: 'string',
     DateTime: 'string',
     Date: 'string',
+    ObjectID: 'string'
   };
   public prefix = '';
   public suffix = '';
